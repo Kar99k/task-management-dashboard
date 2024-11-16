@@ -3,3 +3,5 @@ export enum STATUS {
   PENDING = "Pending",
   COMPLETED = "Completed",
 }
+
+export const LOCAL_STORAGE_KEY = "tasks";

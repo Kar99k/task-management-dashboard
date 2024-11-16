@@ -5,8 +5,6 @@ import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 
-import TaskItemCard from "@/components/molecules/TaskItemCard";
-import { STATUS } from "@/types/status";
 import TaskList from "@/components/organism/TaskList";
 export default function Home() {
   return (

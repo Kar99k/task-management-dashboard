@@ -1,4 +1,4 @@
-import { STATUS } from "./status";
+import { STATUS } from "./constant";
 
 export {};
 

@@ -1,4 +1,4 @@
-import { STATUS } from "@/types/status";
+import { STATUS } from "@/types/constant";
 
 export const mockTasks: TaskItem[] = [
   {
