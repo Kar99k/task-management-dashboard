@@ -1,55 +1,53 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
+"use client";
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-
+import TaskItemCard from "@/components/molecules/TaskItemCard";
+import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/input";
+import { Select, SelectItem } from "@nextui-org/select";
+import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 export default function Home() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
+    <section className="p-6 xl:p-12 bg-foreground-50 min-h-screen">
+      <div className="flex flex-col gap-8">
+        <span className="text-4xl font-bold">Project Title</span>
+        <div className="flex justify-between">
+          <div className="flex justify-between w-1/2 gap-4">
+            <div className="flex w-full gap-4">
+              <Select
+                label="Search By"
+                placeholder="Select an option"
+                className="w-72"
+              >
+                <SelectItem key="title">Title</SelectItem>
+                <SelectItem key="description"> Description</SelectItem>
+              </Select>
+
+              <Input
+                label="Search"
+                isClearable
+                radius="lg"
+                placeholder="Type to search..."
+              />
+            </div>
+            <div>
+              <Button
+                className="bg-default-100 h-full"
+                startContent={<ArrowUpNarrowWide />}
+              >
+                Sort By Due Date
+              </Button>
+            </div>
+          </div>
+          <div className="h-full">
+            <Button startContent={<PlusIcon />} color="primary">
+              Add New Task
+            </Button>
+          </div>
         </div>
-      </div>
 
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
+        <div className="">
+          <TaskItemCard />
+        </div>
       </div>
     </section>
   );
