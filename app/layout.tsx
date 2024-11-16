@@ -30,7 +30,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="flex flex-col xl:grid xl:grid-cols-[340px_1fr] min-h-screen">
+        <div className="flex flex-col xl:grid xl:grid-cols-[280px_1fr] min-h-screen">
           <header className="xl:sticky xl:top-0 xl:h-screen bg-BG">
             <NavBar />
           </header>

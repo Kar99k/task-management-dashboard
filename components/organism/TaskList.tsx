@@ -1,17 +1,15 @@
 import TaskItemCard from "../molecules/TaskItemCard";
 
-import { mockTasks } from "@/data/mockData";
-
-const TaskList = () => {
+const TaskList = ({ data }: { data: TaskItem[] }) => {
   return (
-    <div>
+    <div className="flex justify-center">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {mockTasks.map((task, index) => {
+        {data.map((task, index) => {
           return (
             <TaskItemCard
               key={index}
               description={task.description}
-              dueDate={task.dueDate}
+              dueDate={new Date(task.dueDate)}
               id={123}
               status={task.status}
               title={task.title}

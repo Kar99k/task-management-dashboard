@@ -1,12 +1,17 @@
 "use client";
-
+import { useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 
 import TaskList from "@/components/organism/TaskList";
+import { mockTasks } from "@/data/mockData";
+import TaskService from "@/services/TaskServices";
+
 export default function Home() {
+  const [tasks, setTasks] = useState<TaskItem[]>(TaskService.getTasks());
+
   return (
     <section className="p-6 xl:p-12 bg-foreground-50 min-h-screen">
       <div className="flex flex-col gap-8">
@@ -47,7 +52,7 @@ export default function Home() {
         </div>
 
         <div className="">
-          <TaskList />
+          <TaskList data={tasks} />
         </div>
       </div>
     </section>

@@ -39,14 +39,6 @@ class TaskService {
   private static saveTasks(tasks: TaskItem[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
   }
-
-  // filtering status
-  static filterStatus(status: STATUS): TaskItem[] {
-    const tasks = this.getTasks();
-    const filteredTasks = tasks.filter((task) => task.status !== status);
-
-    return filteredTasks;
-  }
 }
 
 export default TaskService;
