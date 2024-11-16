@@ -11,8 +11,21 @@ import {
 import { CalendarClock, EllipsisVertical } from "lucide-react";
 
 import { STATUS } from "@/types/constant";
+import { useTaskStore } from "@/store/TaskStore";
 
-const TaskItemCard = ({ title, description, status, dueDate }: TaskItem) => {
+const TaskItemCard = ({
+  title,
+  description,
+  status,
+  dueDate,
+  id,
+}: TaskItem) => {
+  const { deleteTask } = useTaskStore();
+
+  const handleDelete = (id: number) => {
+    deleteTask(id);
+  };
+
   return (
     <div>
       <Card className="max-w-[400px]">
@@ -26,7 +39,12 @@ const TaskItemCard = ({ title, description, status, dueDate }: TaskItem) => {
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
               <DropdownItem key="new">Edit</DropdownItem>
-              <DropdownItem key="delete" className="text-danger" color="danger">
+              <DropdownItem
+                key="delete"
+                className="text-danger"
+                color="danger"
+                onClick={() => handleDelete(id)}
+              >
                 Delete
               </DropdownItem>
             </DropdownMenu>
