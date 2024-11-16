@@ -1,7 +1,6 @@
-import { LOCAL_STORAGE_KEY, STATUS } from "@/types/constant";
+import { LOCAL_STORAGE_KEY } from "@/types/constant";
 
 class TaskService {
-  // Get all tasks
   static getTasks(): TaskItem[] {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY);
 
@@ -9,15 +8,17 @@ class TaskService {
   }
 
   // Adding a new task
-  static addTask(task: TaskItem): void {
+  static addTask(task: TaskItem): TaskItem[] {
     const tasks = this.getTasks();
 
     tasks.push(task);
     this.saveTasks(tasks);
+
+    return tasks;
   }
 
   // Updating an existing task
-  static updateTask(updatedTask: TaskItem): void {
+  static updateTask(updatedTask: TaskItem): TaskItem[] {
     const tasks = this.getTasks();
     const taskIndex = tasks.findIndex((task) => task.id === updatedTask.id);
 
@@ -25,14 +26,18 @@ class TaskService {
       tasks[taskIndex] = updatedTask;
       this.saveTasks(tasks);
     }
+
+    return tasks;
   }
 
-  // Deletinig a task by ID
-  static deleteTask(taskId: number): void {
+  // Deleting a task by ID
+  static deleteTask(taskId: number): TaskItem[] {
     const tasks = this.getTasks();
     const filteredTasks = tasks.filter((task) => task.id !== taskId);
 
     this.saveTasks(filteredTasks);
+
+    return filteredTasks;
   }
 
   // Save tasks to local storage

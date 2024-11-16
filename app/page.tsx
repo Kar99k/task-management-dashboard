@@ -6,7 +6,6 @@ import { Select, SelectItem } from "@nextui-org/select";
 import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 
 import TaskList from "@/components/organism/TaskList";
-import { mockTasks } from "@/data/mockData";
 import TaskService from "@/services/TaskServices";
 
 export default function Home() {
