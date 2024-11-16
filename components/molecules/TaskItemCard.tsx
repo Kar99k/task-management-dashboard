@@ -10,11 +10,13 @@ import {
 } from "@nextui-org/dropdown";
 import { CalendarClock, EllipsisVertical } from "lucide-react";
 
+import { STATUS } from "@/types/status";
+
 const TaskItemCard = ({ title, description, status, dueDate }: TaskItem) => {
   return (
     <div>
       <Card className="max-w-[400px]">
-        <CardHeader className="flex gap-3 justify-between p-5">
+        <CardHeader className="flex gap-3 justify-between p-5 items-start">
           <span className="text-3xl font-semibold">{title}</span>
           <Dropdown>
             <DropdownTrigger>
@@ -33,7 +35,16 @@ const TaskItemCard = ({ title, description, status, dueDate }: TaskItem) => {
         <CardBody className="p-5 pt-0 text-foreground-700 flex flex-col gap-4">
           <p>{description}</p>
           <div className="flex justify-between">
-            <Chip color="warning" radius="sm">
+            <Chip
+              color={
+                status === STATUS.COMPLETED
+                  ? "success"
+                  : status === STATUS.IN_PROGRESS
+                    ? "warning"
+                    : "danger"
+              }
+              radius="sm"
+            >
               {status}
             </Chip>
 

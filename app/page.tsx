@@ -1,10 +1,13 @@
 "use client";
 
-import TaskItemCard from "@/components/molecules/TaskItemCard";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
+
+import TaskItemCard from "@/components/molecules/TaskItemCard";
+import { STATUS } from "@/types/status";
+import TaskList from "@/components/organism/TaskList";
 export default function Home() {
   return (
     <section className="p-6 xl:p-12 bg-foreground-50 min-h-screen">
@@ -46,7 +49,7 @@ export default function Home() {
         </div>
 
         <div className="">
-          <TaskItemCard />
+          <TaskList />
         </div>
       </div>
     </section>

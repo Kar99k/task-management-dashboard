@@ -1,13 +1,10 @@
+import { STATUS } from "./status";
+
 export {};
 
 declare global {
-  enum STATUS {
-    IN_PROGRESS = "In Progress",
-    PENDING = "Pending",
-    COMPLETED = "Completed",
-  }
-
   interface TaskItem {
+    id: number;
     title: string;
     description: string;
     status: STATUS;
