@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/dropdown";
 import { CalendarClock, EllipsisVertical } from "lucide-react";
 
-import { STATUS } from "@/types/status";
+import { STATUS } from "@/types/constant";
 
 const TaskItemCard = ({ title, description, status, dueDate }: TaskItem) => {
   return (
