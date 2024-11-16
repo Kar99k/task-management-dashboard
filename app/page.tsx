@@ -3,29 +3,23 @@ import { Key, useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
-import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
+import { ArrowDownNarrowWide, ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 import { Tab, Tabs } from "@nextui-org/tabs";
+import { useDisclosure } from "@nextui-org/modal";
 
 import TaskList from "@/components/organism/TaskList";
 import { useTaskStore } from "@/store/TaskStore";
 import { STATUS } from "@/types/constant";
 import { mapKeyToStatus } from "@/utils/utils";
 import FormModal from "@/components/molecules/FormModal";
-import { useDisclosure } from "@nextui-org/modal";
 
 export default function Home() {
-  const {
-    displayedTasks,
-    loadTasks,
-    addTask,
-    updateTask,
-    filterByStatus,
-    sortByDate,
-    resetTasks,
-  } = useTaskStore();
+  const { displayedTasks, loadTasks, filterByStatus, sortByDate, resetTasks } =
+    useTaskStore();
 
   const [selected, setSelected] = useState<string>("All");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [order, setOrder] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     loadTasks();
@@ -38,6 +32,11 @@ export default function Home() {
     } else {
       loadTasks();
     }
+  };
+
+  const handleSort = () => {
+    setOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+    sortByDate(order);
   };
 
   return (
@@ -66,7 +65,14 @@ export default function Home() {
             <div>
               <Button
                 className="bg-default-100 h-full"
-                startContent={<ArrowUpNarrowWide />}
+                startContent={
+                  order === "desc" ? (
+                    <ArrowUpNarrowWide />
+                  ) : (
+                    <ArrowDownNarrowWide />
+                  )
+                }
+                onClick={handleSort}
               >
                 Sort By Due Date
               </Button>
