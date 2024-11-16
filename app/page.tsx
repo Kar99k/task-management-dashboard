@@ -7,25 +7,25 @@ import { ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 
 import TaskList from "@/components/organism/TaskList";
-import TaskService from "@/services/TaskServices";
 import { useTaskStore } from "@/store/TaskStore";
 import { STATUS } from "@/types/constant";
 import { mapKeyToStatus } from "@/utils/utils";
+import FormModal from "@/components/molecules/FormModal";
+import { useDisclosure } from "@nextui-org/modal";
 
 export default function Home() {
-  const [tasks, setTasks] = useState<TaskItem[]>(TaskService.getTasks());
   const {
     displayedTasks,
     loadTasks,
     addTask,
     updateTask,
-    deleteTask,
     filterByStatus,
     sortByDate,
     resetTasks,
   } = useTaskStore();
 
   const [selected, setSelected] = useState<string>("All");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     loadTasks();
@@ -73,9 +73,14 @@ export default function Home() {
             </div>
           </div>
           <div className="h-full">
-            <Button color="primary" startContent={<PlusIcon />}>
+            <Button
+              color="primary"
+              startContent={<PlusIcon />}
+              onPress={onOpen}
+            >
               Add New Task
             </Button>
+            <FormModal isOpen={isOpen} onOpenChange={onOpenChange} />
           </div>
         </div>
 

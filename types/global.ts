@@ -8,7 +8,7 @@ declare global {
     title: string;
     description: string;
     status: STATUS;
-    dueDate: Date;
+    dueDate: Date | null;
   }
 
   type TaskList = TaskItem[];
@@ -23,5 +23,11 @@ declare global {
     filterByStatus: (status: STATUS) => void;
     sortByDate: (order: "asc" | "desc") => void;
     resetTasks: () => void;
+  }
+
+  interface FormModalProps {
+    isOpen: boolean;
+    onOpenChange: (isOpen: boolean) => void;
+    task?: TaskItem;
   }
 }

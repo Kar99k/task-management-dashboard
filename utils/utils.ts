@@ -1,3 +1,5 @@
+import { CalendarDate } from "@internationalized/date";
+
 import { STATUS } from "@/types/constant";
 
 export const mapKeyToStatus = (key: string): STATUS => {
@@ -11,4 +13,16 @@ export const mapKeyToStatus = (key: string): STATUS => {
     default:
       return STATUS.COMPLETED;
   }
+};
+
+export const DateToCalendarDate = (date: Date): CalendarDate => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return new CalendarDate(year, month, day);
+};
+
+export const CalendarDateToDate = (calendarDate: CalendarDate): Date => {
+  return new Date(calendarDate.year, calendarDate.month - 1, calendarDate.day);
 };
