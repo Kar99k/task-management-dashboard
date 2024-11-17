@@ -14,9 +14,14 @@ import { mapKeyToStatus } from "@/utils/utils";
 import FormModal from "@/components/molecules/FormModal";
 
 export default function Home() {
-  const { displayedTasks, loadTasks, filterByStatus, sortByDate, resetTasks } =
-    useTaskStore();
-
+  const {
+    displayedTasks,
+    tasks,
+    loadTasks,
+    filterByStatus,
+    sortByDate,
+    resetTasks,
+  } = useTaskStore();
   const [selected, setSelected] = useState<string>("All");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [order, setOrder] = useState<"asc" | "desc">("asc");

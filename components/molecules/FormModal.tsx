@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -45,7 +45,7 @@ const FormModal: React.FC<FormModalProps> = ({
     }
   }, [task]);
 
-  const handleSave = () => {
+  const handleSubmit = () => {
     const newTask: TaskItem = {
       id: task?.id || Date.now(),
       title,
@@ -79,6 +79,7 @@ const FormModal: React.FC<FormModalProps> = ({
                 label="Task Title"
                 placeholder="Enter Task Title"
                 type="text"
+                validationBehavior="native"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
@@ -92,6 +93,7 @@ const FormModal: React.FC<FormModalProps> = ({
                 isRequired
                 label="Due Date"
                 minValue={today(getLocalTimeZone())}
+                validationBehavior="native"
                 value={dueDate ? DateToCalendarDate(dueDate) : undefined}
                 onChange={(date) => setDueDate(CalendarDateToDate(date))}
               />
@@ -103,7 +105,7 @@ const FormModal: React.FC<FormModalProps> = ({
               <Button
                 className="text-white"
                 color="success"
-                onPress={handleSave}
+                onPress={handleSubmit}
               >
                 {task ? "Update" : "Create"}
               </Button>

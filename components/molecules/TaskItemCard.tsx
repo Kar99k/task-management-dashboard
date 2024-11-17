@@ -9,6 +9,9 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { CalendarClock, EllipsisVertical } from "lucide-react";
+import { useDisclosure } from "@nextui-org/modal";
+
+import FormModal from "./FormModal";
 
 import { STATUS } from "@/types/constant";
 import { useTaskStore } from "@/store/TaskStore";
@@ -21,6 +24,7 @@ const TaskItemCard = ({
   id,
 }: TaskItem) => {
   const { deleteTask } = useTaskStore();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleDelete = (id: number) => {
     deleteTask(id);
@@ -38,7 +42,9 @@ const TaskItemCard = ({
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
-              <DropdownItem key="new">Edit</DropdownItem>
+              <DropdownItem key="new" onPress={onOpen}>
+                Edit
+              </DropdownItem>
               <DropdownItem
                 key="delete"
                 className="text-danger"
@@ -78,6 +84,11 @@ const TaskItemCard = ({
         </CardBody>
         <Divider />
       </Card>
+      <FormModal
+        isOpen={isOpen}
+        task={{ title, description, status, dueDate, id }}
+        onOpenChange={onOpenChange}
+      />
     </div>
   );
 };
