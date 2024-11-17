@@ -25,6 +25,50 @@ const FormModal: React.FC<FormModalProps> = ({
   const [description, setDescription] = useState<string>("");
   const [dueDate, setDueDate] = useState<Date | null>();
   const [status, setStatus] = useState<STATUS>(STATUS.PENDING);
+  const [error, setError] = useState<ErrorState>({
+    title: { errorMessage: "", isError: false },
+    dueDate: { errorMessage: "", isError: false },
+  });
+
+  const validateFields = (title: string, dueDate: Date | null): boolean => {
+    let isValid = true;
+
+    // Title Validation
+    const titleError = { errorMessage: "", isError: false };
+
+    if (!title.trim()) {
+      titleError.errorMessage = "Task Title is required.";
+      titleError.isError = true;
+      isValid = false;
+    } else if (title.length < 4) {
+      titleError.errorMessage = "Task Title must be at least 4 characters.";
+      titleError.isError = true;
+      isValid = false;
+    }
+
+    // Due Date Validation
+    const dueDateError = { errorMessage: "", isError: false };
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0); // Normalize today's date
+    if (!dueDate) {
+      dueDateError.errorMessage = "Due Date is required.";
+      dueDateError.isError = true;
+      isValid = false;
+    } else if (dueDate < today) {
+      dueDateError.errorMessage = "Due Date cannot be in the past.";
+      dueDateError.isError = true;
+      isValid = false;
+    }
+
+    // Update error state
+    setError({
+      title: titleError,
+      dueDate: dueDateError,
+    });
+
+    return isValid;
+  };
 
   const { addTask, updateTask } = useTaskStore();
 
@@ -33,6 +77,10 @@ const FormModal: React.FC<FormModalProps> = ({
     setDescription("");
     setDueDate(null);
     setStatus(STATUS.PENDING);
+    setError({
+      title: { errorMessage: "", isError: false },
+      dueDate: { errorMessage: "", isError: false },
+    });
   };
 
   useEffect(() => {
@@ -47,23 +95,25 @@ const FormModal: React.FC<FormModalProps> = ({
   }, [task]);
 
   const handleSubmit = () => {
-    const newTask: TaskItem = {
-      id: task?.id || Date.now(),
-      title,
-      description,
-      status,
-      dueDate: dueDate || null,
-    };
+    if (validateFields(title, dueDate || null)) {
+      const newTask: TaskItem = {
+        id: task?.id || Date.now(),
+        title,
+        description,
+        status,
+        dueDate: dueDate || null,
+      };
 
-    if (task) {
-      updateTask(newTask);
-      clearField();
-    } else {
-      addTask(newTask);
-      clearField();
+      if (task) {
+        updateTask(newTask);
+        clearField();
+      } else {
+        addTask(newTask);
+        clearField();
+      }
+
+      onOpenChange(false);
     }
-
-    onOpenChange(false);
   };
 
   return (
@@ -77,6 +127,8 @@ const FormModal: React.FC<FormModalProps> = ({
             <ModalBody>
               <Input
                 isRequired
+                errorMessage={error.title.errorMessage}
+                isInvalid={error.title.isError}
                 label="Task Title"
                 placeholder="Enter Task Title"
                 type="text"
@@ -93,6 +145,8 @@ const FormModal: React.FC<FormModalProps> = ({
               <div className="flex gap-4">
                 <DatePicker
                   isRequired
+                  errorMessage={error.dueDate.errorMessage}
+                  isInvalid={error.dueDate.isError}
                   label="Due Date"
                   minValue={today(getLocalTimeZone())}
                   validationBehavior="native"

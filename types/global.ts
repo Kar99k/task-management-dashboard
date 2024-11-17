@@ -37,4 +37,10 @@ declare global {
     searchByOption: Options;
     query: string;
   }
+
+  interface ErrorState {
+    title: { errorMessage: string; isError: boolean };
+    dueDate: { errorMessage: string; isError: boolean };
+  }
+
 }
