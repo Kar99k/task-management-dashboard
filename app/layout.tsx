@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: "Task Management Dashboard",
     template: "Task Management Dashboard",
   },
-  description: "siteConfig.description",
+  description: "Description",
   icons: {
     icon: "/favicon.ico",
   },
