@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import clsx from "clsx";
 
 import { fontSans } from "@/config/fonts";
-import NavBar from "@/components/organism/NavBar";
 
 export const metadata: Metadata = {
   title: {
@@ -27,14 +26,10 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
-        <div className="flex flex-col xl:grid xl:grid-cols-[280px_1fr] min-h-screen">
-          <header className="xl:sticky xl:top-0 xl:h-screen bg-BG">
-            <NavBar />
-          </header>
-
+        <div className="min-h-screen">
           <main className="w-full">{children}</main>
         </div>
       </body>

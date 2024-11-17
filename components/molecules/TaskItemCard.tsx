@@ -32,7 +32,7 @@ const TaskItemCard = ({
 
   return (
     <div>
-      <Card className="max-w-[400px]">
+      <Card className="min-w-[360px]">
         <CardHeader className="flex gap-3 justify-between p-5 items-start">
           <span className="text-3xl font-semibold">{title}</span>
           <Dropdown>
