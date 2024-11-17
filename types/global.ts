@@ -12,6 +12,7 @@ declare global {
   }
 
   type TaskList = TaskItem[];
+  type Options = "Title" | "Description";
 
   interface TaskStore {
     tasks: TaskItem[]; // All tasks
@@ -23,11 +24,17 @@ declare global {
     filterByStatus: (status: STATUS) => void;
     sortByDate: (order: "asc" | "desc") => void;
     resetTasks: () => void;
+    searchBy: ({ searchByOption, query }: SearchProps) => void;
   }
 
   interface FormModalProps {
     isOpen: boolean;
     onOpenChange: (isOpen: boolean) => void;
     task?: TaskItem;
+  }
+
+  interface SearchProps {
+    searchByOption: Options;
+    query: string;
   }
 }

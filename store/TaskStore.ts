@@ -53,4 +53,6 @@ export const useTaskStore = create<TaskStore>((set) => ({
       displayedTasks: state.tasks,
     }));
   },
+
+  searchBy: ({ searchByOption, query }: SearchProps) => {},
 }));

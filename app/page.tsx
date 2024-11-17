@@ -3,7 +3,12 @@ import { Key, useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
-import { ArrowDownNarrowWide, ArrowUpNarrowWide, PlusIcon } from "lucide-react";
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  PlusIcon,
+  SearchIcon,
+} from "lucide-react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 import { useDisclosure } from "@nextui-org/modal";
 
@@ -14,17 +19,13 @@ import { mapKeyToStatus } from "@/utils/utils";
 import FormModal from "@/components/molecules/FormModal";
 
 export default function Home() {
-  const {
-    displayedTasks,
-    tasks,
-    loadTasks,
-    filterByStatus,
-    sortByDate,
-    resetTasks,
-  } = useTaskStore();
+  const { displayedTasks, loadTasks, filterByStatus, sortByDate, searchBy } =
+    useTaskStore();
   const [selected, setSelected] = useState<string>("All");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [order, setOrder] = useState<"asc" | "desc">("asc");
+  const [searchByOption, setSearchBy] = useState<Options>("Title");
+  const [query, setQuery] = useState<string>("");
 
   useEffect(() => {
     loadTasks();
@@ -44,6 +45,10 @@ export default function Home() {
     sortByDate(order);
   };
 
+  const handleSearch = () => {
+    searchBy({ searchByOption, query });
+  };
+
   return (
     <section className="p-6 xl:p-12 bg-foreground-50 min-h-screen">
       <div className="flex flex-col gap-8">
@@ -55,16 +60,20 @@ export default function Home() {
                 className="w-72"
                 label="Search By"
                 placeholder="Select an option"
+                selectedKeys={new Set([searchByOption])}
+                onChange={(e) => setSearchBy(e.target.value as Options)}
               >
-                <SelectItem key="title">Title</SelectItem>
-                <SelectItem key="description"> Description</SelectItem>
+                <SelectItem key="Title">Title</SelectItem>
+                <SelectItem key="Description"> Description</SelectItem>
               </Select>
 
               <Input
-                isClearable
                 label="Search"
                 placeholder="Type to search..."
                 radius="lg"
+                value={query}
+                onValueChange={setQuery}
+                onChange={handleSearch}
               />
             </div>
             <div>
