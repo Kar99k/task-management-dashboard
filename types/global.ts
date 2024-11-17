@@ -23,8 +23,7 @@ declare global {
     deleteTask: (taskId: number) => void;
     filterByStatus: (status: STATUS) => void;
     sortByDate: (order: "asc" | "desc") => void;
-    resetTasks: () => void;
-    searchBy: ({ searchByOption, query }: SearchProps) => void;
+    searchBy: ({ searchByOption, query, selected }: SearchProps) => void;
   }
 
   interface FormModalProps {
@@ -36,11 +35,11 @@ declare global {
   interface SearchProps {
     searchByOption: Options;
     query: string;
+    selected: string;
   }
 
   interface ErrorState {
     title: { errorMessage: string; isError: boolean };
     dueDate: { errorMessage: string; isError: boolean };
   }
-
 }

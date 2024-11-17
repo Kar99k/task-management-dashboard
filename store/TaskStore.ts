@@ -48,19 +48,15 @@ export const useTaskStore = create<TaskStore>((set) => ({
     }));
   },
 
-  resetTasks: () => {
-    set((state) => ({
-      displayedTasks: state.tasks,
-    }));
-  },
-
-  searchBy: ({ searchByOption, query }: SearchProps) => {
+  searchBy: ({ searchByOption, query, selected }: SearchProps) => {
     set((state) => ({
       displayedTasks: state.tasks.filter((task) => {
-        const fieldToSearch =
-          searchByOption === "Title" ? task.title : task.description;
+        if ((task.status as string) === selected || selected === "All") {
+          const fieldToSearch =
+            searchByOption === "Title" ? task.title : task.description;
 
-        return fieldToSearch.toLowerCase().includes(query.toLowerCase());
+          return fieldToSearch.toLowerCase().includes(query.toLowerCase());
+        }
       }),
     }));
   },

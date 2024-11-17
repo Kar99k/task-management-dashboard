@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    searchBy({ searchByOption, query });
+    searchBy({ searchByOption, query, selected });
   }, [searchByOption, query]);
 
   return (
@@ -77,9 +77,9 @@ export default function Home() {
               color="warning"
               startContent={
                 order === "desc" ? (
-                  <ArrowUpNarrowWide />
+                  <ArrowUpNarrowWide size={16} />
                 ) : (
-                  <ArrowDownNarrowWide />
+                  <ArrowDownNarrowWide size={16} />
                 )
               }
               variant="flat"
