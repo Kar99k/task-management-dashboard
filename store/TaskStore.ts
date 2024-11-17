@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import TaskService from "@/services/TaskServices";
 import { STATUS } from "@/types/constant";
+import { mockTasks } from "@/data/mockData";
 
 export const useTaskStore = create<TaskStore>((set) => ({
   tasks: [],
@@ -11,6 +12,10 @@ export const useTaskStore = create<TaskStore>((set) => ({
     const tasks = TaskService.getTasks();
 
     set({ tasks, displayedTasks: tasks });
+  },
+
+  addMockTasks: () => {
+    TaskService.saveTasks(mockTasks);
   },
 
   addTask: (task: TaskItem) => {

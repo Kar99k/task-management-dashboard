@@ -41,7 +41,7 @@ class TaskService {
   }
 
   // Save tasks to local storage
-  private static saveTasks(tasks: TaskItem[]): void {
+  static saveTasks(tasks: TaskItem[]): void {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
   }
 }

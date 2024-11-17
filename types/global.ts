@@ -18,6 +18,7 @@ declare global {
     tasks: TaskItem[]; // All tasks
     displayedTasks: TaskItem[]; // Filtered and sorted tasks
     loadTasks: () => void; // Load tasks from TaskService
+    addMockTasks: () => void;
     addTask: (task: TaskItem) => void;
     updateTask: (task: TaskItem) => void;
     deleteTask: (taskId: number) => void;

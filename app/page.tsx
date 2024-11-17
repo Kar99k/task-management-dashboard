@@ -3,7 +3,12 @@ import { Key, useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
-import { ArrowDownNarrowWide, ArrowUpNarrowWide, PlusIcon } from "lucide-react";
+import {
+  ArrowDownNarrowWide,
+  ArrowUpNarrowWide,
+  Database,
+  PlusIcon,
+} from "lucide-react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 import { useDisclosure } from "@nextui-org/modal";
 
@@ -14,8 +19,14 @@ import { mapKeyToStatus } from "@/utils/utils";
 import FormModal from "@/components/molecules/FormModal";
 
 export default function Home() {
-  const { displayedTasks, loadTasks, filterByStatus, sortByDate, searchBy } =
-    useTaskStore();
+  const {
+    displayedTasks,
+    loadTasks,
+    filterByStatus,
+    sortByDate,
+    searchBy,
+    addMockTasks,
+  } = useTaskStore();
   const [selected, setSelected] = useState<string>("All");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [order, setOrder] = useState<"asc" | "desc">("asc");
@@ -38,6 +49,11 @@ export default function Home() {
   const handleSort = () => {
     setOrder((prev) => (prev === "asc" ? "desc" : "asc"));
     sortByDate(order);
+  };
+
+  const handleMock = () => {
+    addMockTasks();
+    loadTasks();
   };
 
   useEffect(() => {
@@ -88,7 +104,16 @@ export default function Home() {
               Sort By Due Date
             </Button>
           </div>
-          <div className="h-full">
+          <div className="h-full flex gap-4">
+            <Button
+              color="primary"
+              variant="flat"
+              startContent={<Database />}
+              onClick={handleMock}
+            >
+              Add Mock Data
+            </Button>
+
             <Button
               color="primary"
               startContent={<PlusIcon />}
