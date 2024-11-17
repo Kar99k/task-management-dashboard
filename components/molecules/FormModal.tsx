@@ -10,6 +10,7 @@ import { Input, Textarea } from "@nextui-org/input";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { DatePicker } from "@nextui-org/date-picker";
 import { Button } from "@nextui-org/button";
+import { Select, SelectItem } from "@nextui-org/select";
 
 import { STATUS } from "@/types/constant";
 import { useTaskStore } from "@/store/TaskStore";
@@ -89,14 +90,28 @@ const FormModal: React.FC<FormModalProps> = ({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-              <DatePicker
-                isRequired
-                label="Due Date"
-                minValue={today(getLocalTimeZone())}
-                validationBehavior="native"
-                value={dueDate ? DateToCalendarDate(dueDate) : undefined}
-                onChange={(date) => setDueDate(CalendarDateToDate(date))}
-              />
+              <div className="flex gap-4">
+                <DatePicker
+                  isRequired
+                  label="Due Date"
+                  minValue={today(getLocalTimeZone())}
+                  validationBehavior="native"
+                  value={dueDate ? DateToCalendarDate(dueDate) : undefined}
+                  onChange={(date) => setDueDate(CalendarDateToDate(date))}
+                />
+                {task && (
+                  <Select
+                    label="Status"
+                    placeholder="Select Status"
+                    selectedKeys={new Set([status])}
+                    onChange={(e) => setStatus(e.target.value as STATUS)}
+                  >
+                    {Object.values(STATUS).map((value) => {
+                      return <SelectItem key={value}>{value}</SelectItem>;
+                    })}
+                  </Select>
+                )}
+              </div>
             </ModalBody>
             <ModalFooter className="flex w-full justify-center gap-4">
               <Button color="danger" variant="light" onPress={onClose}>
