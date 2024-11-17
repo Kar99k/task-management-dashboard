@@ -41,7 +41,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log({ searchByOption, query });
     searchBy({ searchByOption, query });
   }, [searchByOption, query]);
 
