@@ -3,12 +3,7 @@ import { Key, useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
-import {
-  ArrowDownNarrowWide,
-  ArrowUpNarrowWide,
-  PlusIcon,
-  SearchIcon,
-} from "lucide-react";
+import { ArrowDownNarrowWide, ArrowUpNarrowWide, PlusIcon } from "lucide-react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 import { useDisclosure } from "@nextui-org/modal";
 
@@ -45,14 +40,15 @@ export default function Home() {
     sortByDate(order);
   };
 
-  const handleSearch = () => {
+  useEffect(() => {
+    console.log({ searchByOption, query });
     searchBy({ searchByOption, query });
-  };
+  }, [searchByOption, query]);
 
   return (
     <section className="p-6 xl:p-12 bg-foreground-50 min-h-screen">
       <div className="flex flex-col gap-8">
-        <span className="text-4xl font-bold">Project Title</span>
+        <span className="text-4xl font-bold">Task Managment Dashboard</span>
         <div className="flex justify-between">
           <div className="flex justify-between w-1/2 gap-4">
             <div className="flex w-full gap-4">
@@ -73,7 +69,6 @@ export default function Home() {
                 radius="lg"
                 value={query}
                 onValueChange={setQuery}
-                onChange={handleSearch}
               />
             </div>
             <div>
