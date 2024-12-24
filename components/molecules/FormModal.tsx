@@ -151,7 +151,7 @@ const FormModal: React.FC<FormModalProps> = ({
                   minValue={today(getLocalTimeZone())}
                   validationBehavior="native"
                   value={dueDate ? DateToCalendarDate(dueDate) : undefined}
-                  onChange={(date) => setDueDate(CalendarDateToDate(date))}
+                  onChange={(date: any) => setDueDate(CalendarDateToDate(date))}
                 />
                 {task && (
                   <Select
