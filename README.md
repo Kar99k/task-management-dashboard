@@ -1,53 +1,60 @@
-# Next.js & NextUI Template
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+# Task Management Dashboard
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+The Task Management Dashboard is a web application that allows users to efficiently create, view, and manage their tasks. It provides an intuitive interface for organizing tasks and staying on top of deadlines.
 
-## Technologies Used
+### Features :
+ - Task Creation & Management: Add, edit, and delete tasks with ease.
+ - Search by Title/Description: Quickly find tasks using keywords.
+ - Filter by Status: View tasks based on their current status (Pending, In Progress, Completed).
+ - Sort by Due Dates: Organize tasks by their deadlines to prioritize effectively.
+ - Responsive Design: Accessible and user-friendly on both desktop and mobile devices.
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
 
-## How to Use
+## Installation
 
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
+Clone the repository:
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+git clone https://github.com/Kar99k/task-management-dashboard.git
 ```
 
-### Install dependencies
+Navigate to the project folder:
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+```bash
+cd task-management-dashboard
+```
+Install dependencies:
 
 ```bash
 npm install
 ```
-
-### Run the development server
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-### Setup pnpm (optional)
+Open the app in your browser at `http://localhost:3000.`
+    
+## Tech Stack
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+**Core:** NextJS, TailwindCSS, Typescript
 
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
+**State Management:** Zustand
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+**Design System:** NextUI
 
-## License
+## Demo
 
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+[Link to Google drive](https://drive.google.com/file/d/1-dJFOnJofLjZDPDQR6zwBpTxhRelsTZD/view?usp=sharing)
+
+
+## Author
+
+- [@Kar99k](https://www.github.com/Kar99k)
+
+
+## HLD and Architecture
+
+[Mood Board](https://excalidraw.com/#json=jym5J351AkJPJFKurG7If,PVTqtRYMACrvfZ6ALA5Vqghttps://excalidraw.com/#json=jym5J351AkJPJFKurG7If,PVTqtRYMACrvfZ6ALA5Vqg)
